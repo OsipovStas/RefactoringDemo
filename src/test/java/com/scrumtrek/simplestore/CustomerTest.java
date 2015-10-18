@@ -53,5 +53,32 @@ public class CustomerTest {
         assertTrue(statement.contains(TITLE + "\t1.5"));
     }
 
+    @Test
+    public void thatExtraReqPointForNewRelease() throws Exception {
+        customer.addRental(new Rental(new Movie(TITLE, PriceCodes.NewRelease), 3));
+        String statement = customer.Statement();
+        System.out.println(statement);
+        assertNotNull("Statement is not null", statement);
+        assertTrue(statement.contains("You earned 2"));
+    }
+
+    @Test
+    public void thatOneReqPointForNewRelease() throws Exception {
+        customer.addRental(new Rental(new Movie(TITLE, PriceCodes.NewRelease), 1));
+        String statement = customer.Statement();
+        System.out.println(statement);
+        assertNotNull("Statement is not null", statement);
+        assertTrue(statement.contains("You earned 1"));
+    }
+
+
+    @Test
+    public void thatOneReqPointForRegularCase() throws Exception {
+        customer.addRental(new Rental(new Movie(TITLE, PriceCodes.Childrens), 3));
+        String statement = customer.Statement();
+        System.out.println(statement);
+        assertNotNull("Statement is not null", statement);
+        assertTrue(statement.contains("You earned 1"));
+    }
 
 }
