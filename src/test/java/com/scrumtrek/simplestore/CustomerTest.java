@@ -36,12 +36,21 @@ public class CustomerTest {
 
 
     @Test
-    public void thatNewReleaseIsExpecteable() throws Exception {
+    public void thatNewReleaseIsExpectable() throws Exception {
         customer.addRental(new Rental(new Movie(TITLE, PriceCodes.NewRelease), 3));
         String statement = customer.Statement();
         System.out.println(statement);
         assertNotNull("Statement is not null", statement);
         assertTrue(statement.contains(TITLE + "\t9.0"));
+    }
+
+    @Test
+    public void thatChildrenIsExpectable() throws Exception {
+        customer.addRental(new Rental(new Movie(TITLE, PriceCodes.Childrens), 3));
+        String statement = customer.Statement();
+        System.out.println(statement);
+        assertNotNull("Statement is not null", statement);
+        assertTrue(statement.contains(TITLE + "\t1.5"));
     }
 
 
