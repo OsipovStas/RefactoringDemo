@@ -34,6 +34,15 @@ public class CustomerTest {
         assertTrue(statement.contains(TITLE + "\t2.0"));
     }
 
+    @org.junit.Test
+    public void testRegular() throws Exception {
+        customer.addRental(new Rental(new Movie(TITLE, PriceCodes.Regular), 3));
+        String statement = customer.Statement();
+        System.out.println(statement);
+        assertNotNull("Statement is not null", statement);
+        assertTrue(statement.contains(TITLE + "\t3.5"));
+    }
+
 
     @Test
     public void thatNewReleaseIsExpectable() throws Exception {
@@ -45,13 +54,25 @@ public class CustomerTest {
     }
 
     @Test
-    public void thatChildrenIsExpectable() throws Exception {
+    public void thatChildrenMoreThan3Days() throws Exception {
         customer.addRental(new Rental(new Movie(TITLE, PriceCodes.Childrens), 3));
         String statement = customer.Statement();
         System.out.println(statement);
         assertNotNull("Statement is not null", statement);
         assertTrue(statement.contains(TITLE + "\t1.5"));
     }
+
+    @Test
+    public void thatChildrenIsExpectable() throws Exception {
+        customer.addRental(new Rental(new Movie(TITLE, PriceCodes.Childrens), 4));
+        String statement = customer.Statement();
+        System.out.println(statement);
+        assertNotNull("Statement is not null", statement);
+        assertTrue(statement.contains(TITLE + "\t1.5"));
+    }
+
+
+
 
     @Test
     public void thatExtraReqPointForNewRelease() throws Exception {
