@@ -66,11 +66,11 @@ public class Customer {
     }
 
     private double getNewReleaseMovieAmount(Rental each) {
-        return each.getDaysRented() * 3;
+        return each.getDaysRented() * 3.;
     }
 
     private double getRegularMovieAmount(Rental each) {
-        double result = 2;
+        double result = 2.;
         if (each.getDaysRented() > 2) {
             result += (each.getDaysRented() - 2) * 1.5;
         }
