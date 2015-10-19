@@ -14,10 +14,6 @@ import static org.junit.Assert.assertTrue;
 public class CustomerTest {
 
     private static final String TITLE = "Movie1";
-    private String regu = "Rental record for Test\n" +
-            "\tMovie1\t2.0\n" +
-            "Amount owed is 2.0\n" +
-            "You earned 1 frequent renter points.";
     private Customer customer;
 
     @Before
@@ -29,7 +25,7 @@ public class CustomerTest {
     @org.junit.Test
     public void testStatementIsNotNull() throws Exception {
         customer.addRental(new Rental(new Movie(TITLE, PriceCodes.Regular), 1));
-        String statement = customer.Statement();
+        String statement = customer.createStatement();
         System.out.println(statement);
         assertNotNull("Statement is not null", statement);
         assertTrue(statement.contains(TITLE + "\t2.0"));
@@ -38,7 +34,7 @@ public class CustomerTest {
     @org.junit.Test
     public void testRegular() throws Exception {
         customer.addRental(new Rental(new Movie(TITLE, PriceCodes.Regular), 3));
-        String statement = customer.Statement();
+        String statement = customer.createStatement();
         System.out.println(statement);
         assertNotNull("Statement is not null", statement);
         assertTrue(statement.contains(TITLE + "\t3.5"));
@@ -48,7 +44,7 @@ public class CustomerTest {
     @Test
     public void thatNewReleaseIsExpectable() throws Exception {
         customer.addRental(new Rental(new Movie(TITLE, PriceCodes.NewRelease), 3));
-        String statement = customer.Statement();
+        String statement = customer.createStatement();
         System.out.println(statement);
         assertNotNull("Statement is not null", statement);
         assertTrue(statement.contains(TITLE + "\t9.0"));
@@ -57,7 +53,7 @@ public class CustomerTest {
     @Test
     public void thatChildrenMoreThan3Days() throws Exception {
         customer.addRental(new Rental(new Movie(TITLE, PriceCodes.Childrens), 3));
-        String statement = customer.Statement();
+        String statement = customer.createStatement();
         System.out.println(statement);
         assertNotNull("Statement is not null", statement);
         assertTrue(statement.contains(TITLE + "\t1.5"));
@@ -66,7 +62,7 @@ public class CustomerTest {
     @Test
     public void thatChildrenIsExpectable() throws Exception {
         customer.addRental(new Rental(new Movie(TITLE, PriceCodes.Childrens), 4));
-        String statement = customer.Statement();
+        String statement = customer.createStatement();
         System.out.println(statement);
         assertNotNull("Statement is not null", statement);
         assertTrue(statement.contains(TITLE + "\t1.5"));
@@ -78,7 +74,7 @@ public class CustomerTest {
     @Test
     public void thatExtraReqPointForNewRelease() throws Exception {
         customer.addRental(new Rental(new Movie(TITLE, PriceCodes.NewRelease), 3));
-        String statement = customer.Statement();
+        String statement = customer.createStatement();
         System.out.println(statement);
         assertNotNull("Statement is not null", statement);
         assertTrue(statement.contains("You earned 2"));
@@ -87,7 +83,7 @@ public class CustomerTest {
     @Test
     public void thatOneReqPointForNewRelease() throws Exception {
         customer.addRental(new Rental(new Movie(TITLE, PriceCodes.NewRelease), 1));
-        String statement = customer.Statement();
+        String statement = customer.createStatement();
         System.out.println(statement);
         assertNotNull("Statement is not null", statement);
         assertTrue(statement.contains("You earned 1"));
@@ -97,7 +93,7 @@ public class CustomerTest {
     @Test
     public void thatOneReqPointForRegularCase() throws Exception {
         customer.addRental(new Rental(new Movie(TITLE, PriceCodes.Childrens), 3));
-        String statement = customer.Statement();
+        String statement = customer.createStatement();
         System.out.println(statement);
         assertNotNull("Statement is not null", statement);
         assertTrue(statement.contains("You earned 1"));

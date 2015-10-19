@@ -1,7 +1,7 @@
 package com.scrumtrek.simplestore;
 
 class MainClass {
-	 static void Main(String[] args) {
+	 public static void main(String[] args) {
 		// Create movies
 		Movie movCinderella = new Movie("Cinderella", PriceCodes.Childrens);
 		Movie movStarWars = new Movie("Star Wars", PriceCodes.Regular);
@@ -23,7 +23,7 @@ class MainClass {
 		custMickeyMouse.addRental(rental3);
 
 		// Generate invoice
-		String statement = custMickeyMouse.Statement();
+		String statement = custMickeyMouse.createStatement();
 
 		// Print the statement
 		System.out.println(statement);		
