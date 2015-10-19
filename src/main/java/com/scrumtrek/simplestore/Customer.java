@@ -39,17 +39,17 @@ public class Customer {
         return result;
     }
 
-    private double getRentalAmount(Rental each) {
+    private double getRentalAmount(Rental rental) {
         double result;
-        switch (each.getMovie().getPriceCode()) {
+        switch (rental.getMovie().getPriceCode()) {
             case Regular:
-                result = getRegularMovieAmount(each);
+                result = getRegularMovieAmount(rental);
                 break;
             case NewRelease:
-                result = getNewReleaseMovieAmount(each);
+                result = getNewReleaseMovieAmount(rental);
                 break;
             case Childrens:
-                result = getChildrenMovieAmount(each);
+                result = getChildrenMovieAmount(rental);
                 break;
             default:
                 throw new IllegalStateException("A rental has unknown price code.");
