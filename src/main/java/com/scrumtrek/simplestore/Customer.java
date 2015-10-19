@@ -31,27 +31,7 @@ public class Customer {
 			double thisAmount = 0;
 			
 			// Determine amounts for each line
-			switch(each.getMovie().getPriceCode()) {
-				case Regular:
-					thisAmount += 2;
-					if (each.getDaysRented() > 2)
-					{
-						thisAmount += (each.getDaysRented() - 2) * 1.5;
-					}
-					break;
-	
-				case NewRelease:
-					thisAmount += each.getDaysRented() * 3;
-					break;
-	
-				case Childrens:
-					thisAmount += 1.5;
-					if (each.getDaysRented() > 3)
-					{
-						thisAmount = (each.getDaysRented() - 3) * 1.5;
-					}
-					break;
-			}
+			thisAmount = getRentalAmount(each);
 
 			// Add frequent renter points
 			frequentRenterPoints++;
@@ -70,6 +50,32 @@ public class Customer {
 		// Add footer lines
 		result += "Amount owed is " + totalAmount + "\n";
 		result += "You earned " + frequentRenterPoints + " frequent renter points.";
+		return result;
+	}
+
+	private double getRentalAmount(Rental each) {
+		double result = 0.;
+		switch(each.getMovie().getPriceCode()) {
+            case Regular:
+				result += 2;
+                if (each.getDaysRented() > 2)
+                {
+					result += (each.getDaysRented() - 2) * 1.5;
+                }
+                break;
+
+            case NewRelease:
+				result += each.getDaysRented() * 3;
+                break;
+
+            case Childrens:
+				result += 1.5;
+                if (each.getDaysRented() > 3)
+                {
+					result = (each.getDaysRented() - 3) * 1.5;
+                }
+                break;
+        }
 		return result;
 	}
 }
