@@ -21,16 +21,16 @@ public class Customer {
 
         String result = "Rental record for " + name + "\n";
 
-        for (Rental rental : rentals) {
-            // Determine amounts for rental line
-            double thisAmount = getRentalAmount(rental);
+		for (Rental rental : rentals) {
+			// Determine amounts for rental line
+			double thisAmount = getRentalAmount(rental);
 
             // Add frequent renter points
-            frequentRenterPoints += getFrequentRentalPoints(rental);
+			frequentRenterPoints += getFrequentRentalPoints(rental);
 
             // Show figures for this rental
-            result += "\t" + rental.getMovie().getTitle() + "\t" + thisAmount + "\n";
-            totalAmount += thisAmount;
+			result += "\t" + rental.getMovie().getTitle() + "\t" + thisAmount + "\n";
+			totalAmount += thisAmount;
         }
 
         // Add footer lines
